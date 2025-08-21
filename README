@@ -1,0 +1,60 @@
+EasyPOS (Tkinter) - README
+--------------------------
+
+What it is
+A small, touch-friendly Point of Sale (POS) app written in Python with Tkinter.
+
+Requirements
+- Python 3.8 or newer (3.13 works)
+- Tkinter (included with standard Python on Windows/macOS; on Linux install python3-tk)
+
+How to run
+1) Save the main file (e.g., easypos.py).
+2) Open a terminal/Command Prompt in that folder.
+3) Run:  python easypos.py
+   (In PyCharm, ensure Run → Edit Configurations → Script path points to this file.)
+
+First run creates
+- pos_users.json        (users: ID, name, pin, admin flag)
+- pos_items.json        (items: SKU, name, price)
+- pos_transactions.csv  (sales log)
+
+Default login
+- User ID: 0001
+- PIN:     1234  (Admin)
+
+Basic use
+1) Login: tap the field, use the on-screen keypad, press LOGIN.
+2) Add items:
+   - Enter/scan SKU and click Add, OR
+   - Click Lookup…, search by name, double-click item, set Quantity.
+3) Manage cart:
+   - Change Qty / Remove / Clear.
+4) Checkout:
+   - Click Checkout (only one window at a time).
+   - Choose Cash (enter amount to see change) or Card (enter terminal ref if desired).
+   - Confirm Sale to record the transaction.
+
+Admin (admins only)
+- Items: add/edit/delete SKUs (name, price).
+- Users: add/edit/delete users (name, PIN, admin).
+- Audit / Export:
+  - Export a readable text report.
+  - Save a copy of the CSV log.
+
+Settings (edit in code)
+- TAX_RATE (e.g., 0.0825 for 8.25%)
+- USERS_FILE, ITEMS_FILE, TX_LOG paths
+- Theme colors in POSApp.__init__ (BG, CARD_BG, ACCENT, FG)
+
+Troubleshooting
+- App exits with code 0: make sure the file ends with:
+    if __name__ == "__main__":
+        app = POSApp()
+        app.mainloop()
+- "Unterminated string literal": put strings on one line or use "\n".
+- "NameError: f is not defined": keep f.write(...) inside its "with open(... as f):" block.
+- Tkinter missing on Linux: install with your package manager (e.g., sudo apt install python3-tk).
+
+License
+Released under the MIT License.
